@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/Stack.h
+stdexcept
+-
+iostream
+-
+
+../include/StackLinked.h
+stdexcept
+-
+iostream
+-
+Stack.h
+../include/Stack.h
+
+/home/gabriel/Desktop/PA01_GabrielMortensen(Extra)/src/StackLinked.cpp
+StackLinked.h
+/home/gabriel/Desktop/PA01_GabrielMortensen(Extra)/src/StackLinked.h
+iostream
+-
+stdexcept
+-
+

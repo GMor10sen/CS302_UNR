@@ -1,0 +1,11 @@
+/home/gabriel/Desktop/PA01_GabrielMortensen(Extra)/build/CMakeFiles/install/strip.dir
+/home/gabriel/Desktop/PA01_GabrielMortensen(Extra)/build/CMakeFiles/install/local.dir
+/home/gabriel/Desktop/PA01_GabrielMortensen(Extra)/build/CMakeFiles/install.dir
+/home/gabriel/Desktop/PA01_GabrielMortensen(Extra)/build/CMakeFiles/list_install_components.dir
+/home/gabriel/Desktop/PA01_GabrielMortensen(Extra)/build/CMakeFiles/edit_cache.dir
+/home/gabriel/Desktop/PA01_GabrielMortensen(Extra)/build/CMakeFiles/StackLinked.dir
+/home/gabriel/Desktop/PA01_GabrielMortensen(Extra)/build/CMakeFiles/postfix.dir
+/home/gabriel/Desktop/PA01_GabrielMortensen(Extra)/build/CMakeFiles/StackArray.dir
+/home/gabriel/Desktop/PA01_GabrielMortensen(Extra)/build/CMakeFiles/delimiters.dir
+/home/gabriel/Desktop/PA01_GabrielMortensen(Extra)/build/CMakeFiles/rebuild_cache.dir
+/home/gabriel/Desktop/PA01_GabrielMortensen(Extra)/build/CMakeFiles/palindrome.dir
