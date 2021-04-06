@@ -1,0 +1,2 @@
+/usr/bin/ar qc libStackLinked.a  CMakeFiles/StackLinked.dir/src/StackLinked.cpp.o
+/usr/bin/ranlib libStackLinked.a
