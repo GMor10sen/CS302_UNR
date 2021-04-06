@@ -1,1 +1,0 @@
-/usr/bin/c++    -rdynamic CMakeFiles/proj2_E.dir/src/proj2_E.cpp.o  -o proj2_E libBubble.a libMerge.a libQuickSort.a libSortingParent.a 
