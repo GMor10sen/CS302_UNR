@@ -1,1 +1,0 @@
-/usr/bin/c++    -rdynamic CMakeFiles/palindrome.dir/src/palindrome.cpp.o  -o palindrome libStackLinked.a libStackArray.a 
