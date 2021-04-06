@@ -1,0 +1,10 @@
+/home/gabriel/Desktop/CS 302/PA02_GabrielMortensen/build/CMakeFiles/install/strip.dir
+/home/gabriel/Desktop/CS 302/PA02_GabrielMortensen/build/CMakeFiles/install.dir
+/home/gabriel/Desktop/CS 302/PA02_GabrielMortensen/build/CMakeFiles/list_install_components.dir
+/home/gabriel/Desktop/CS 302/PA02_GabrielMortensen/build/CMakeFiles/Merge.dir
+/home/gabriel/Desktop/CS 302/PA02_GabrielMortensen/build/CMakeFiles/SortingParent.dir
+/home/gabriel/Desktop/CS 302/PA02_GabrielMortensen/build/CMakeFiles/rebuild_cache.dir
+/home/gabriel/Desktop/CS 302/PA02_GabrielMortensen/build/CMakeFiles/install/local.dir
+/home/gabriel/Desktop/CS 302/PA02_GabrielMortensen/build/CMakeFiles/Bubble.dir
+/home/gabriel/Desktop/CS 302/PA02_GabrielMortensen/build/CMakeFiles/proj2.dir
+/home/gabriel/Desktop/CS 302/PA02_GabrielMortensen/build/CMakeFiles/edit_cache.dir
