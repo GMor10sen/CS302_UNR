@@ -1,0 +1,2 @@
+/usr/bin/ar qc libSortingParent.a  CMakeFiles/SortingParent.dir/src/SortingParent.cpp.o
+/usr/bin/ranlib libSortingParent.a

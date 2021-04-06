@@ -1,0 +1,11 @@
+/home/gabriel/Desktop/PA02_(Extra)/build/CMakeFiles/install/strip.dir
+/home/gabriel/Desktop/PA02_(Extra)/build/CMakeFiles/install.dir
+/home/gabriel/Desktop/PA02_(Extra)/build/CMakeFiles/list_install_components.dir
+/home/gabriel/Desktop/PA02_(Extra)/build/CMakeFiles/rebuild_cache.dir
+/home/gabriel/Desktop/PA02_(Extra)/build/CMakeFiles/Merge.dir
+/home/gabriel/Desktop/PA02_(Extra)/build/CMakeFiles/SortingParent.dir
+/home/gabriel/Desktop/PA02_(Extra)/build/CMakeFiles/install/local.dir
+/home/gabriel/Desktop/PA02_(Extra)/build/CMakeFiles/Bubble.dir
+/home/gabriel/Desktop/PA02_(Extra)/build/CMakeFiles/QuickSort.dir
+/home/gabriel/Desktop/PA02_(Extra)/build/CMakeFiles/proj2_E.dir
+/home/gabriel/Desktop/PA02_(Extra)/build/CMakeFiles/edit_cache.dir
