@@ -1,0 +1,85 @@
+#include <iostream>
+#include <fstream> 
+#include <string> 
+#include<stdlib.h>
+#include <sstream>
+
+#define Infinity 9999 
+using namespace std;
+
+int main ()
+{
+  // Declare Variables 
+   string vertices; 
+   string Line;
+   int vertices_numb = 0; 
+   bool escape = 0; 
+   int origin_vertex_numb = 0;
+   int weight_numb = 0; 
+   int to_vertex_numb = 0;
+  // Open the file to read from it 
+   ifstream list("List.txt");
+;
+   
+ // Get the first line and convert it to int
+ // These are # of vertices 
+   getline(list, vertices);
+   vertices_numb = stoi (vertices,nullptr,0);
+   
+ // Use new found number to create matrix
+  int map[vertices_numb][vertices_numb]={0};
+ // Go through Array and make all unreachable 
+ // Except for the vertices that are infact themselves
+ // creating a diagonal matrix of 0's  
+  int m = vertices_numb;
+  int n = vertices_numb; 
+  for (int k = 0; k < m; k++) 
+  { 
+   for (int j = 0; j < n; j++) 
+   { 
+      map[k][j] = Infinity; 
+      if (k == j) 
+        map[k][j] = 0; 
+   } 
+   cout << endl; 
+  }  
+
+ // Make loop that converts matrix by reading rest of file
+  while ( getline(list, Line))
+   {
+    // get first number which is origin vertex
+     stringstream next_character (Line); 
+     next_character.str(Line); 
+     next_character >> origin_vertex_numb;  
+     std::cout << "This Vertex: " << origin_vertex_numb << "\n"; 
+          // While there is still more to read peice by peice  
+           while (next_character.bad() == 0)
+           {
+               // read in the 'to vertex' and 'weight' to update graph  
+                 next_character >> to_vertex_numb;  
+                 std::cout << "Going To Vertex: " << to_vertex_numb << "\n"; 
+                 next_character >> weight_numb; 
+                 std::cout << "With Weight: " << weight_numb << "\n"; 
+                 map[origin_vertex_numb][to_vertex_numb] = weight_numb;
+           }
+    // Delete everything stored in next_character to start fresh
+    next_character.clear(); 
+  } 
+ //Close the file
+  list.close();
+
+// result 
+  for (int k = 0; k < m; k++) 
+  { 
+   for (int j = 0; j < n; j++) 
+   {
+      std::cout << map[k][j] << " ";
+   } 
+   cout << endl; 
+  } 
+
+
+
+
+return 0;
+};

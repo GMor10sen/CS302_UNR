@@ -1,0 +1,149 @@
+#include <iostream> 
+#include <vector> // for vector functions 
+#include <cstdlib> // for random 
+#include <ctime> // for random 
+#include <numeric> // for mean value 
+#include <algorithm> // for  heap functions  
+using namespace std; 
+#define Size 10
+
+
+// ~~~~~~~~~~Make struct for unique variables~~~~~~~~~~~~~~~~~~~
+struct check
+{
+ // Declare Variables 
+  int looking_for;
+ // Constructor
+  check (int const & random_int)
+  { 
+   // Set random_int to value we are looking for 
+    looking_for = random_int;
+  }
+ // Operator checks each element in vector and comapres to looking for value  
+  bool operator () (int const & current_element)
+  { 
+     return (current_element == looking_for);
+  }     
+};
+
+// ~~~~~~~~~~~~~Main Function~~~~~~~~~~~~~~~~~~~
+int main ()
+{
+
+// ~~~~~~ Make a heap consisting of 10 different ints ~~~~~~
+
+ // Make Vector & Declare some Variables 
+  std::vector<double> Final; 
+  int random_int = 0; 
+  double Own_Choosing [Size]; 
+  int i = 0;
+ 
+ // Used To Make Random Each Time
+  std::srand(std::time(nullptr));
+ 
+ // Insert unique random numbers into vector 
+  while (i < Size) 
+  {
+    random_int = (rand() % 100) + 1;
+    Own_Choosing[i] = random_int;
+   // Need to have something to push into vector first 
+    if (i == 0)
+    { 
+      Final.push_back(Own_Choosing[i]); 
+      i++; 
+    }
+   // check elements as progression happens to make sure unique values occur 
+    else 
+    {
+      if (std::none_of(Final.begin(),Final.end(), check(random_int))) 
+      {
+          	Final.push_back(Own_Choosing[i]); 
+          	i++;
+      }
+    }
+  }    
+   std::cout << "\n";
+
+// ~~~~~~~~~~~~~~Making The Heap~~~~~~~~~~~~~~~~~~~~~~~~~
+ // Show User Output before heap 
+  std::cout << "Before Making Heap: ";
+    for (int j = 0; j < Final.size(); j++)
+  {
+    std::cout << Final[j] << " "; 
+  }
+  std::cout << "\n";
+ 
+ // making the heap 
+  std::make_heap(Final.begin(), Final.end());
+
+ // Showing User Heap 
+  std::cout << "After Making Heap: ";
+  for (int j = 0; j < Final.size(); j++)
+  {
+    std::cout << Final[j] << " "; 
+  }
+  std::cout << "\n";
+ 
+// ~~~~~~ Include a satement to show the max element of the heap ~~~~~~~
+
+  // Heap is initally sorted in max order already so just display top of heap
+        double Old_Max = Final.front(); 
+	std::cout << "Max element is: " << Final.front() << "\n"; 
+  
+
+//~~~~~~~ Add a new value that is the mean of the random values you created in the previous step ~~~~~~~~~
+
+ // Get mean of values inserted
+  double Mean = ( std::accumulate (Final.begin(), Final.end(), 0.0) / 10 );
+  std::cout << "Inserted the mean: " << Mean << "\n";
+ // place in vector, push into the heap and resort 
+  Final.push_back (Mean); 
+ // Reorder elements with push_heap 
+  std::push_heap(Final.begin(), Final.end());
+ // Update User On Heap 
+  std::cout << "Updated Heap: ";
+  for (int j = 0; j < Final.size(); j++)
+  {
+    std::cout << Final[j] << " "; 
+  }
+  std::cout << "\n";
+
+// ~~~~~~~ Delete the max element of heap ~~~~~~~~~~~~~~
+  // Pop off the max and notfiy user on old max 
+   std::cout << "Old Maximum was: " << Old_Max << "\n";
+   std::pop_heap(Final.begin(), Final.end());
+   Final.pop_back();
+  // Get new max after poping 
+   double New_Max = Final.front(); 
+   std::cout << "New Maximum after pop of max is: " << New_Max << "\n";
+ 
+//~~~~~~~~~ Sort the heap ~~~~~~~~~~~~~~~
+   
+   // Update User On current Heap 
+   std::cout << "Heap Before Sort: ";
+   for (int j = 0; j < Final.size(); j++)
+   {
+     std::cout << Final[j] << " "; 
+   }
+   std::cout << "\n";
+
+   // remake heap to put values in proper spot
+  std::make_heap(Final.begin(), Final.end());
+       std::cout << "Using make_heap to put elments in heap order: ";
+   for (int j = 0; j < Final.size(); j++)
+   {
+     std::cout << Final[j] << " "; 
+   }
+   std::cout << "\n";
+   
+   std::sort_heap (Final.begin(), Final.end());
+     std::cout << "Using Sort_heap to put elements in ascending order: ";
+   for (int j = 0; j < Final.size(); j++)
+   {
+     std::cout << Final[j] << " "; 
+   }
+   std::cout << "\n";
+   
+   std::cout << "\n";
+return 0;
+}; 

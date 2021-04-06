@@ -1,0 +1,154 @@
+#include <iostream> 
+#include <fstream>
+#define Infinity 9999 
+#define Graph_Size 6
+// Declare functions 
+  int minKey (int key[], bool MinSpanTree_Set[]);
+  void Prim_Implement (int Graph_Input [Graph_Size][Graph_Size]); 
+  void Result (int U_Node[], int Graph_Input [Graph_Size][Graph_Size]); 
+
+
+int main ()
+{
+
+ // If need to turn lsit to matrix 
+
+
+
+ // Need to make a graph first
+ // Let's do a semi complex sample case 
+ /*
+
+         (1) --- 10 --(4)  
+        /   \        / |  \
+       10    50    20  |   1
+      /       \   /    |    \ 
+   (0)         (3) -2----- (5)
+      \	      /        |     
+       20    20        |    	
+        \   /          |    
+         (2) ----------33 
+      
+ 
+*/
+// Make graph visuliaztion adjacency matrix 
+ int Matrix_Graph[Graph_Size][Graph_Size] = 
+			{ 
+			  {0, 10, 20, Infinity, Infinity, Infinity},  // for 0 node 
+                          {10, 0, Infinity, 50, 10, Infinity},  // for 1 node 
+                          {20, Infinity, 0, 20, 33, Infinity},  // for 2 node 
+	                  {Infinity, 50, 20, 0, 20, 2},  // for 3 node 
+                          {Infinity, 10, 33, 20, 0, 1},  // for 4 node 
+                          {Infinity, Infinity, Infinity, 2, 1, 0}      // for 5 node
+			}; 
+
+
+/*
+
+         (1)
+       /     \
+      1       4
+     /         \ 
+   (0)         (3)
+      \        / 
+       2      3
+        \    /
+         (2) 
+
+
+
+// Make graph visuliaztion adjacency matrix 
+// This is test case 2, to run it make Graph_Size 4 instead of 6 and swap comments 
+ int Matrix_Graph[Graph_Size][Graph_Size] = 
+			{ 
+			  {0, 1, 2, Infinity},  // for 0 node 
+                          {1, 0, Infinity, 4},  // for 1 node 
+                          {2, Infinity, 0, 3},  // for 2 node 
+	                  {Infinity, 4, 3, 0},  // for 3 node 
+			}; 
+
+ */
+ // Time to implement Prim 
+  Prim_Implement (Matrix_Graph);  
+return 0; 
+};
+
+// ~~~ Prim function ~~~ 
+
+void Prim_Implement (int Graph_Input [Graph_Size][Graph_Size])
+{
+  // declare variables 
+   int Current_Constructed_MST [Graph_Size]; 
+   int Min_Edge_Value [Graph_Size];
+   bool Included_Check [Graph_Size];
+
+  // Set each weight as infinite and disconnect any nodes 
+     for (int i = 0; i < Graph_Size; i++)
+     { 
+          Min_Edge_Value [i] = Infinity;
+          Included_Check [i] = 0; 
+     }
+  // Create a root to go off of, in this case node 0
+    Min_Edge_Value [0] = 0;
+    Current_Constructed_MST [0] = -1; 
+  // 
+    for (int i = 0; i < Graph_Size-1; i++)
+     { 
+       // Get smallest weight of connected nodes through function 
+        int Smallest_Key = minKey (Min_Edge_Value,Included_Check); 
+       // Include newest index as part of the minimum spanning tree
+        Included_Check [Smallest_Key] = 1; 
+       
+       // use loop within loop to update values 
+       for (int j = 0; j < Graph_Size; j++)
+       {
+   	 if (Graph_Input[Smallest_Key][j] && Included_Check[j] == false && Graph_Input[Smallest_Key][j] < Min_Edge_Value [j]) 
+          {
+               // Next element in current construted answer is the smallest key
+               // graph edge data using graph on main function 
+		Current_Constructed_MST[j] = Smallest_Key; 
+                Min_Edge_Value[j] = Graph_Input[Smallest_Key][j]; 
+                 
+          }
+       }
+     }
+   Result (Current_Constructed_MST, Graph_Input); 
+
+};
+// Result Function 
+//
+// This function prints out the data that was stored in the U array with the coresponding 
+// graph data 
+void Result (int Edge_Value[], int Graph_Input [Graph_Size][Graph_Size])
+{
+  std::cout << "Edge\tWeight\n";
+  for (int i = 1; i < Graph_Size; i++)
+  {
+    std:: cout << Edge_Value[i] << "-" << i << "\t" << Graph_Input[i][Edge_Value[i]];
+    std::cout << "\n"; 
+  }
+};
+
+// Find minimum function 
+// Finds minimum values not yet included in the minimum spanning tree set
+
+int minKey (int key[], bool MinSpanTree_Set[])
+{
+  // declare variables 
+   int minumum = Infinity; 
+   int min_index = 0; 
+
+ // run through options to see find minimum weight to connected nodes 
+   for (int i = 0; i < Graph_Size; i++)
+   {
+    // if not in set yet and the key is smaller than infinity 
+    // then update key and min index  
+     if (MinSpanTree_Set[i] == false && key[i] < minumum)
+     {    
+          minumum = key [i];
+          min_index = i;
+     }
+   } 
+   return min_index; 
+};
+

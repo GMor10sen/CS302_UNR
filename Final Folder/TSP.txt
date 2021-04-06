@@ -1,0 +1,135 @@
+#include<iostream>
+#include<vector>
+#include<cstdint>
+#include<climits>
+#include<algorithm>
+using namespace std;
+#define Infinity 99999
+
+//~~~~~~~~~~
+// Need to update depending on node amount
+// (input by # of cols) 
+#define Locations 8
+//~~~~~~~~~
+
+
+ void TSP_Burte_Force(float graph[][Locations], int start);
+
+
+int main() {
+    
+    float Map[][Locations]={
+     {0,218.4,518.2,704.3,438.8},
+     {218.4,0,735.9,807.7,568.8},
+     {518.2,735.9,0,829.1,421.2},
+     {704.3,807.7,829.1,0,1114.5},
+     {438.8,568.8,421.2,1114.5,0}
+     };
+
+     float Slack[][Locations]={
+     {0,10,16,12,8},
+     {10,0,15, Infinity ,18},
+     {16,15,0,10,Infinity},
+     {12,Infinity,10,0,8},
+     {8,20,Infinity,8,0}
+     };
+   
+     float Treasure[][Locations]={
+     {0,6,Infinity,Infinity,Infinity,Infinity,18,8},
+     {6,0, 8,Infinity,Infinity,Infinity,Infinity,2},
+     {Infinity,8, 0,8,Infinity,Infinity,Infinity,Infinity},
+     {Infinity,Infinity, 8,0,8,Infinity,Infinity,Infinity},
+     {Infinity, Infinity, Infinity, 8,0,Infinity,Infinity,20},
+     {Infinity,Infinity, Infinity,Infinity,Infinity,0,10,12},
+     {18,Infinity, Infinity,Infinity,Infinity,10,0,12},
+     {8,2, Infinity,Infinity,20,12,12,0}
+     };
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Remember to change Locations # up at #define 
+    // and Map_NAME and START position 
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    int start_Treasure=7; // start on node 8  
+    int start_others=0; // start on node 1 
+    
+    //TSP_Burte_Force(Map,start_others);
+    TSP_Burte_Force(Treasure,start_Treasure); 
+    return 0;
+};
+
+// TSP solution 
+void TSP_Burte_Force (float graph[][Locations], int start)
+{
+   // Decalre Variables 
+     vector<int> CurrentPath;
+     int path [Locations];
+     int temporary [Locations];
+
+   // Insert every other possible location into the currentpath vector 
+     for(int i=0; i<Locations; i++)
+     {
+         if(i!=start)
+           CurrentPath.push_back(i);
+     }
+   // Set the minimum pahts to infinity because they haven't been reached yet
+     float min_path=Infinity;
+   // Try and output every possible path and solution (terriable for complexity because brute force)
+    do{ 
+       // Reset (or set if first time) the new path that the program is starting on
+         float current_pathweight=0;
+         int new_start = start;
+       // Output first starting position 
+         std::cout<< new_start + 1 <<" to ";
+
+       // Run a loop to check each position, when next node avaliable 
+       // move the new start to the new row which indicates that node 
+       // then store that new start position into the temp to reach other positions later
+         for (int i=0; i < CurrentPath.size(); i++)
+         {
+             current_pathweight+=graph[new_start][CurrentPath[i]];
+             new_start = CurrentPath[i];
+             temporary[i] = new_start;
+         }
+        
+       // add up the last position outside the loop to get the returning magnitude to the start  
+        current_pathweight+=graph[new_start][start];
+     
+       // Depending on how many nodes there are output either continues or ends
+        for(int i=0; i<Locations-1; i++)
+        {
+            if(i==Locations-2)
+                 std::cout<<temporary[i]+1  << "\n";
+            else
+                 std::cout<<temporary[i]+1  << " to ";
+        }
+
+       // Ouput the cost of the path added up in first for loop         
+        std::cout <<" This path Costs:  "<< current_pathweight << "\n";
+        
+      // Use std::min to check if the minimum path is smaller than path just found
+      // if so then add the locations to the finaloutput array that stores the answer
+	min_path = min(min_path, current_pathweight);           
+        if (min_path == current_pathweight)
+        {
+            for(int i=0; i<Locations-1; i++)
+            {
+                path[i]=temporary[i];
+            }
+        }
+    } while(next_permutation(CurrentPath.begin(),CurrentPath.end())); // Does the premutations
+         
+    // Divide up output to make answer more clear
+    // Output path position updated in while loop    
+       std::cout << "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+         std::cout << start+1 << " to ";
+        for(int i=0;i<Locations-1;i++)
+        {
+            if(i==Locations-2)
+                 std::cout<<path[i]+1 <<" to "<<start+1 << "\n";
+            else
+                 std::cout<<path[i]+1 <<" to ";
+        }
+         std::cout << "This path is shortest distance...\nShortest Distance = "<< min_path << "\n";
+}
+

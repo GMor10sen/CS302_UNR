@@ -1,0 +1,127 @@
+#include <iostream>
+#include <stdio.h>
+#include <limits.h> 
+
+#define MakeShift_Infinity 9999 
+#define Graph_Size 9
+
+// Declare Variables 
+  int MinimumDistance (int key[], bool MinSpanTree_Set[]);
+  void Result (int dist[], int Stored_Elements[Graph_Size][Graph_Size], int n, int src);  
+  void dijkstra (int graph[Graph_Size][Graph_Size], int Starting_Point); 
+
+int main ()
+{
+
+/*
+    Make A graph to conduct test 
+
+        (1)-8-(2)---7---(3)
+       / |     | \       | \
+      4  |     2  \      |  9
+     /   |     |   \     |   \
+  (0)    11   (8)   4   14   (4)
+     \   |   / |     \   |   /
+      8  |  7  6      \  | 10
+       \ | /   |       \ | /
+        (7)-1-(6)--2----(5)
+*/
+ int graph_input[Graph_Size][Graph_Size] = {
+					{0, 4, 0, 0, 0, 0, 0, 8, 0}, 
+					{4, 0, 8, 0, 0, 0, 0, 11, 0}, 
+					{0, 8, 0, 7, 0, 4, 0, 0, 2}, 
+					{0, 0, 7, 0, 9, 14, 0, 0, 0}, 
+					{0, 0, 0, 9, 0, 10, 0, 0, 0}, 
+					{0, 0, 4, 14, 10, 0, 2, 0, 0}, 
+					{0, 0, 0, 0, 0, 2, 0, 1, 6}, 
+					{8, 11, 0, 0, 0, 0, 1, 0, 7}, 
+					{0, 0, 2, 0, 0, 0, 6, 7, 0} 
+					}; 
+
+  
+
+ std::cout << "~~~dijkstra~~~\n";
+  int Starting_Node = 0; 
+  dijkstra(graph_input, Starting_Node); 
+
+   return 0; 
+};
+// dijkstra algorithim 
+// 
+void dijkstra (int graph[Graph_Size][Graph_Size], int Starting_Point)
+{
+  // Create array that will hold shortest distance elements 
+   int Shortest_Distance_List [Graph_Size];
+  // Create array to store the final traversals of the nodes 
+    int Element_Traverse [Graph_Size][Graph_Size];
+  // Create list of elements included in this list 
+   bool Included_List [Graph_Size];
+
+  // Disconnect every element and set their sizes to infinity  
+    for (int i = 0; i < Graph_Size; i++)
+     { 
+          Shortest_Distance_List [i] = MakeShift_Infinity;
+          Included_List [i] = 0; 
+     }
+  // Have to have a starting point however so not all are inifinity 
+    Shortest_Distance_List [Starting_Point] = 0;
+  // Find the next shortest path from the starting point 
+    for (int i = 0; i < Graph_Size-1; i++)
+     { 
+       // Get smallest weight index of connected vertices through function 
+        int Smallest_Key = MinimumDistance (Shortest_Distance_List, Included_List); 
+       // Include newest index as part of the minimum spanning tree
+        Included_List [Smallest_Key] = 1; 
+       // use loop within loop to update array with adjacent vertices
+       // by adding them with the previous value 
+       for (int j = 0; j < Graph_Size; j++)
+       {
+         // must check conditions
+         // 1) has it been visited alreadt ( == false statement)
+         // 2) is it a neighboring vertice (must be on same row which is why we have graph[Smallest_Key][j])
+         // 3) Must not be = to infinity ( thus the != makeshift Infinity)
+         // 4) It is the shortest possible option ( last section in if statement) taught by Professor, known as Triangulation  
+   	 if ( Included_List [j] == false && graph[Smallest_Key][j] && Shortest_Distance_List[Smallest_Key] != MakeShift_Infinity && Shortest_Distance_List[Smallest_Key] + graph[Smallest_Key][j] <  Shortest_Distance_List[j]) 
+                {
+		 Shortest_Distance_List[j] = Shortest_Distance_List[Smallest_Key] + graph[Smallest_Key][j]; 
+                } 
+       }
+    std::cout << "\n";
+     }
+ // Get The result of everything with one function call 
+  Result ( Shortest_Distance_List, Element_Traverse, Graph_Size, Starting_Point); 
+}; 
+//Result Function 
+// Dispalys Answer Nedded To Find Smallest Edge Sum
+void Result (int dist[], int Stored_Elements[Graph_Size][Graph_Size], int n, int src)
+{
+  int j = 0;
+ // Traverse through the loop to output each respective distance 
+  for (int i =0; i < Graph_Size; i++)
+  {
+    std::cout << "Shortest Distace From element " << src;
+    std::cout << " to element " << i << " is: " << dist[i] << "\n";
+  } 
+  std::cout << "\n";
+};
+
+// Mimum Distance Function 
+// 
+int MinimumDistance (int dist[], bool sptSet [])
+{
+   // declare variables 
+   int minumum = MakeShift_Infinity; 
+   int min_index = 0; 
+ // run through ALL options to see find minimum weight to connected nodes 
+   for (int i = 0; i < Graph_Size; i++)
+   { 
+     if (sptSet[i] == false && dist[i] < minumum)
+     {   // Set the new minimum and return that index 
+          minumum = dist [i];
+          min_index = i;
+          
+     }
+   }    
+
+   return min_index; 
+};

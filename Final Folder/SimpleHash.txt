@@ -1,0 +1,86 @@
+#include <iostream>
+#include <stdlib.h> 
+using namespace std;
+#define Huge_Number 999
+
+bool HashSearch (int user_input, bool Hash[][2]);
+void HashTableCreate (int example_array [], bool Hash[][2], int Length);
+
+int main ()
+{
+
+  // Declare Variabels, make example array 
+   int input = 0; 
+   int example [] = {-1, 3, 4, -12, -2, 5} ;
+   int Length_Array = sizeof(example)/sizeof(example[0]);
+  // Make array that helps us have hash mapping, have 2 in cols to because checking 0 and 1 for + and - 
+   bool Hash [Huge_Number][2] = {0};
+  // Fill in hash table 
+   HashTableCreate (example, Hash, Length_Array); 
+  // Output list to show user what is in the list 
+   std::cout << "List Includes: ";
+   for (int i =0; i < Length_Array; i++)
+   {  
+     std::cout << example [i];
+     if (i == Length_Array-1)
+       std::cout << "."; 
+     else       
+       std::cout << " , ";     
+   }
+   std::cout << "\n";
+  // Get User Input       
+   std::cout << "~~~Simple Hash~~~\n";
+   std::cout << "Input Number To Look Up: \n";
+   std::cin >> input; 
+ // Check with function then notify user on result 
+   if (HashSearch (input, Hash) == 1 )
+     std::cout << input << " Exists!\n";
+   else 
+     std::cout << input << " Does not exist...\n";
+
+return 0;
+};
+
+// Not working ... Need to fix. 
+void HashTableCreate (int example_array [], bool Hash[][2], int Length)
+{
+  // Declare Variables 
+   int i = 0;
+   int insert = 0; 
+  // Insert all the elements first with for loop and if statement for - and + 
+    for (i; i < Length; i++) 
+    { 
+      // If negative then use zero as key
+       if (example_array[i] < 0) 
+        Hash[ abs((example_array[i]))][0] = 1; 
+      // Otherwise the number is positve so use 1 as key
+       else 
+         Hash[abs((example_array[i]))][1] = 1;
+    }
+};
+
+
+bool HashSearch (int user_input, bool Hash[][2])
+{
+ // Have to check respective signs
+ // check negative 
+  if (user_input < 0) 
+   {
+     // Check either key for variable 
+      if (Hash[abs(user_input)][0] == 1)  
+        return 1; 
+     // Value not inside 
+      else 
+       return 0;  
+   } 
+ // check postive 
+   else 
+   {
+     // Check either key for variable 
+      if (Hash[abs(user_input)][1] == 1)  
+       return 1; 
+     // Value not inside 
+      else 
+       return 0;
+   }   
+}; 
