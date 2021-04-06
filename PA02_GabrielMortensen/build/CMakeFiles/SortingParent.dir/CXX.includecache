@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/SortingParent.h
+iostream
+-
+stdexcept
+-
+
+/home/gabriel/Desktop/CS 302/PA02_GabrielMortensen/src/SortingParent.cpp
+SortingParent.h
+/home/gabriel/Desktop/CS 302/PA02_GabrielMortensen/src/SortingParent.h
+fstream
+-
+iostream
+-
+
